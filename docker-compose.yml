@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  playwright:
+    build: .
+    container_name: playwright-tests
+    depends_on:
+      - postgres
+    environment:
+      ENV: test
+      BASE_URL: http://web:3000
+      API_URL: http://api:3001
+      DB_HOST: postgres
+      DB_USER: test
+      DB_PASSWORD: test
+      DB_TYPE: postgres
+      ENABLE_MEDIA: "false"
+    volumes:
+      - ./playwright-report:/app/playwright-report
+      - ./reports:/app/reports
+    command: npx playwright test --grep @smoke
+
+  postgres:
+    image: postgres:15
+    container_name: postgres-test
+    restart: always
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    ports:
+      - "5432:5432"

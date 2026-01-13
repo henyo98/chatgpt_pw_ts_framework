@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "playwright test",
+    "lint": "npm run -ws lint",
+    "build": "npm run -ws build"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/henyo98/chatgpt_pw_ts_framework.git"
@@ -17,7 +25,13 @@
   },
   "homepage": "https://github.com/henyo98/chatgpt_pw_ts_framework#readme",
   "devDependencies": {
+    "@faker-js/faker": "^8.0.0",
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.5"
+    "@types/node": "^25.0.5",
+    "allure-playwright": "^2.0.0",
+    "dotenv": "^16.6.1",
+    "typescript": "^5.0.0",
+    "zod": "^3.25.76",
+        "prettier": "^3.2.5"
   }
 }

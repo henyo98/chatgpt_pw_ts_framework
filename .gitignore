@@ -6,3 +6,15 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Files with credentials
+users.dev.json
+users.test.json
+users.prod.json
+
+# Environment variables
+.env
+.env.*
+
+# Working folder
+/inwork/

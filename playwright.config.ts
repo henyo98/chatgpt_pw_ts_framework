@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-
+import { env } from '@core/env';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -12,7 +12,8 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './packages', // or maybe: testDir: 'packages', 
+  timeout: 10_000,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -22,18 +23,38 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['allure-playwright', { outputFolder: 'reports/allure-results' }],
+    ['html', { outputFolder: 'reports/html', open: 'never' }],
+    ['junit', { outputFile: 'reports/junit.xml' }]
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
-
+    baseURL: env.BASE_URL,
+    screenshot: env.ENABLE_MEDIA === 'true' ? 'only-on-failure' : 'off',
+    video: env.ENABLE_MEDIA === 'true' ? 'retain-on-failure' : 'off',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: env.ENABLE_MEDIA === 'true' ? 'retain-on-failure' : 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
   projects: [
+    { name: 'user', use: { storageState: undefined } },
+    { name: 'zboradmin', use: { storageState: undefined } },
+    { name: 'superadmin', use: { storageState: undefined } },
+    {
+      name: 'UI Tests',
+      testDir: './src/ui/tests',
+    },
+    {
+      name: 'API Tests',
+      testDir: './src/api/tests',
+    },
+    {
+      name: 'DB Tests',
+      testDir: './src/db/tests',
+    },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
