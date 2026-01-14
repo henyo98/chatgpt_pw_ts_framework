@@ -29,10 +29,10 @@
   "homepage": "https://github.com/henyo98/chatgpt_pw_ts_framework#readme",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.5",
-    "allure-playwright": "^2.0.0",
-    "typescript": "^5.0.0",
-    "prettier": "^3.2.5",
-    "eslint": "^8.48.0"
+    "@types/node": "^25.0.8",
+    "allure-playwright": "^3.4.4",
+    "typescript": "^5.9.3",
+    "prettier": "^3.7.4",
+    "eslint": "^9.39.2"
   }
 }
