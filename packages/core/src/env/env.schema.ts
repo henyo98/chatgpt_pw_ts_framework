@@ -6,6 +6,7 @@ export const EnvSchema = z.object({
   DB_HOST: z.string(),
   DB_USER: z.string(),
   DB_PASSWORD: z.string(),
+  DB_TYPE: z.enum(['postgres', 'mysql']).default('postgres'),
   ENABLE_MEDIA: z.enum(['true', 'false']).default('true')
 });
 export type Env = z.infer<typeof EnvSchema>;

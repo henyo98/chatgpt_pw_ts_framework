@@ -1,0 +1,7 @@
+{
+  "apiTimeoutMs": 5000,
+  "uiTimeoutMs": 8000,
+  "enablePayments": true,
+  "dbPoolSize": 5,
+  "seedOnStart": true
+}
