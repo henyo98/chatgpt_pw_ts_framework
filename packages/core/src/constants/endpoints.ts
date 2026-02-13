@@ -1,5 +1,9 @@
 export const ENDPOINTS = {
-  users: '/users',
-  login: '/login',
-  payments: '/payments'
+  zborovi: '/zborovi',
+  csrf: '/auth/csrf',
+  credentials: '/auth/callback/credentials',
+  session: '/auth/session',
+  // users: '/users',
+  // login: '/login',
+  // payments: '/payments'
 };

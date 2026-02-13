@@ -18,3 +18,6 @@ users.prod.json
 
 # Working folder
 /inwork/
+
+# Reports
+/reports/

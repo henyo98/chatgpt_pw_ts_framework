@@ -1,5 +1,5 @@
 {
-  "name": "@packages/core",
+  "name": "@testframework/core",
   "version": "1.0.0",
   "private": true,
   "main": "dist/index.js",
@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "lint": "eslint src --ext .ts",
-    "clean": "rm -rf dist"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "zod": "^3.23.0",

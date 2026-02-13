@@ -1,5 +1,5 @@
 {
-  "name": "@packages/ui",
+  "name": "@testframework/ui",
   "version": "1.0.0",
   "private": true,
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
-    "@core": "*",
+    "@testframework/core": "workspace:*",
     "@playwright/test": "^1.57.0"
   }
 }

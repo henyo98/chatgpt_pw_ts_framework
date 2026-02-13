@@ -1,5 +1,5 @@
 {
-  "name": "@packages/db",
+  "name": "@testframework/db",
   "version": "1.0.0",
   "private": true,
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
-    "@core": "*",
+    "@testframework/core": "workspace:*",
     "pg": "^8.11.5",
     "mysql2": "^3.9.7"
   }

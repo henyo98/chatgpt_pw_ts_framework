@@ -1,11 +1,32 @@
-import { test as base, request } from '@playwright/test';
-import { UsersAPI } from '../clients/usersApi';
 
-export const test = base.extend<{ usersApi: UsersAPI }>({
-  usersApi: async ({}, use) => {
-    const api = await request.newContext();
-    const client = new UsersAPI(api);
-    await use(client);
-    await api.dispose();
-  }
+
+import { base, request } from '@playwright/test';
+import { ZboroviAPI } from './zborovi-api';
+import { APIClients } from './api-clients';
+import { getAuthenticatedClient } from '@core/auth/getAuthenticatedClient';
+
+// Extend base fixture
+export const test = base.extend<{
+    api: APIClients;
+    getAuthenticatedApi: (username: string) => Promise<APIClients>;
+}>({
+    // Unauthenticated API
+    api: async ({ }, use) => {
+        const ctx = await request.newContext();
+        await use({ zborovi: new ZboroviAPI(ctx) });
+        await ctx.dispose();
+    },
+    // Authenticated API factory with automatic cleanup
+    getAuthenticatedApi: async ({ }, use) => {
+        // Track all clients created in a single test
+        const clients: { context: any }[] = [];
+        // Pass this function to the test
+        await use(async (username: string) => {
+            const client = await getAuthenticatedClient(username);
+            clients.push(client);
+            return client;
+        });
+        // After the test finishes, dispose all contexts automatically
+        await Promise.all(clients.map(c => c.context.dispose()));
+    },
 });

@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/apiFixtures';
+import { test, expect } from '../../../../inwork/Authentication files newer/apiFixtures';
 
 test('@smoke @perf users API responds fast', async ({ usersApi }) => {
   const start = Date.now();

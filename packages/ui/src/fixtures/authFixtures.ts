@@ -1,6 +1,6 @@
 import { test as base, request, BrowserContext } from '@playwright/test';
-import { TokenManager } from '@core/auth/tokenManager';
-import { CookieManager } from '@core/auth/cookieManager';
+import { TokenManager } from 'inwork/Authentication files newer/tokenManager';
+import { CookieManager } from 'inwork/Authentication files newer/cookieManager';
 import { users } from '@core/config/users.config';
 import { BasePage } from '@core/base/BasePage';
 import { URLS } from '@core/constants/urls';

@@ -15,6 +15,11 @@ export class BaseAPI {
             throw new Error(`API ${status}: ${await r.text()}`)
         const json = await r.json()
         return schema ? schema.parse(json) : json
+        //     if (!schema) return json;
+        //     const parsed = schema.safeParse(json);
+        //     if (parsed.success) return parsed.data;
+        //     // parsed.error is a ZodError with detailed issues
+        //     throw new Error(`Schema validation failed: ${parsed.error.toString()}\nResponse body: ${JSON.stringify(json)}`);
     }
     get<T>(u: string, s?: ZodSchema<T>) {
         return withRetry(() => this.handle(this.request.get(u), s))
