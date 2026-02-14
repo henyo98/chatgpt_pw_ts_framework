@@ -2,6 +2,7 @@ import { z } from 'zod';
 import * as generalSchemas from './generalSchemas';
 
 export const ZborSchema = z.object({
+    "announcements_count":z.number(),
     "id": z.number(),
     "user_id": z.number(),
     "name": z.string(),
@@ -17,17 +18,13 @@ export const ZborSchema = z.object({
     "facebook_url": z.union([z.null(), z.string()]),
     "viber_url": z.union([z.null(), z.string()]),
     "instagram_url": z.union([z.null(), z.string()]),
-    "confirmation_email": z.string(),
-    "confirmation_token": z.string(),
-    "confirmed": z.boolean(),
+
     "is_active": z.boolean(),
     "confirmed_at": generalSchemas.isoDateSchema, //TODO: If this is not specific enough, change to z.string().datetime({ offset: true }).transform((s) => new Date(s)); which accepts only ISO 8601 format with timezone offset
     "is_public": z.number(),
-    "approved": z.boolean(),
     "tiktok_url": z.union([z.null(), z.string()]),
     "mail_accepted": z.boolean(),
     "approved_at": generalSchemas.isoDateSchema,
-    "ip_address": z.string(),
     "terms": z.boolean(),
     "created_at": generalSchemas.isoDateSchema,
     "updated_at": generalSchemas.isoDateSchema,

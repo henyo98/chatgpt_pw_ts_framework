@@ -1,0 +1,18 @@
+{
+    "guest": {
+        "username": "guest",
+        "password": "guest"
+    },
+    "user": {
+        "username": "user1",
+        "password": "pass1"
+    },
+    "zboradmin": {
+        "username": "admin",
+        "password": "adminpass"
+    },
+    "superadmin": {
+        "username": "root",
+        "password": "rootpass"
+    }
+}

@@ -31,11 +31,13 @@
     "build": "npm run -ws build"
   },
   "devDependencies": {
-    "@playwright/test": "^1.57.0",
     "@types/node": "^25.0.8",
     "allure-playwright": "^3.4.4",
-    "typescript": "^5.9.3",
+    "eslint": "^9.39.2",
     "prettier": "^3.7.4",
-    "eslint": "^9.39.2"
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2"
   }
 }

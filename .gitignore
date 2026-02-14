@@ -6,18 +6,20 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+package-lock.json
 
 # Files with credentials
-users.dev.json
-users.test.json
-users.prod.json
+users.*.json
+!users.test.json.template
 
 # Environment variables
 .env
 .env.*
+!.env.test.template
 
 # Working folder
 /inwork/
 
 # Reports
 /reports/
+/allure-results

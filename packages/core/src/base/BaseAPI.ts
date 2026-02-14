@@ -1,20 +1,53 @@
 import { APIRequestContext, APIResponse } from '@playwright/test'
 import { ZodSchema } from 'zod'
 import { withRetry } from '@core/errors/retry'
+import { logZodError } from '@core/loggers/zodLogger'
+import { logger } from '@core/loggers/logger'
 export class BaseAPI {
     constructor(protected request: APIRequestContext) { }
     private async handle<T>(
         res: Promise<APIResponse>,
         schema?: ZodSchema<T>,
-        allow204 = false
+        allow204 = false,
+        method?: string,
+        url?: string
     ): Promise<T> {
+        // logger.debug(`API ${method} → ${url}`)
         const r = await res
         const status = r.status()
-        if (allow204 && status === 204) return undefined as any
-        if (status < 200 || status >= 300)
-            throw new Error(`API ${status}: ${await r.text()}`)
+        // logger.debug(`API ${method} ← ${url} [${status}]`)
+        if (allow204 && status === 204) {
+            logger.info(`API ${method} ${url} returned 204 (No Content)`)
+            return undefined as any
+        }
+        if (status < 200 || status >= 300) {
+            const body = await r.text()
+            logger.error(`API ${method} ${url} failed`, {
+                status,
+                body
+            })
+            throw new Error(`API ${status}: ${body}`)
+        }
         const json = await r.json()
-        return schema ? schema.parse(json) : json
+        if (!schema) {
+            logger.debug(`API ${method} ${url} response parsed (no schema validation)`)
+            return json
+        }
+
+        try {
+            const parsed = schema.parse(json)
+            // logger.debug(`API ${method} ${url} schema validation passed`)
+            return parsed
+
+        } catch (err) {
+            logger.error(`API ${method} ${url} schema validation failed`)
+            logZodError(err)
+            logger.debug(`Invalid response body`, { body: json })
+            throw err // directly throw
+        }
+
+
+
         //     if (!schema) return json;
         //     const parsed = schema.safeParse(json);
         //     if (parsed.success) return parsed.data;

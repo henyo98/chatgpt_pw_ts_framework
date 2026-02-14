@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
-import { test } from '../../../../inwork/Authentication files newer/apiFixtures';
+import { test } from '@api/fixtures/apiFixtures';
 import { ROLES } from '@core/constants/domain';
-
 
 ROLES.forEach((ROLE) => {
   test(`get zborovi list for user: ${ROLE}`, async ({ api, getAuthenticatedApi }) => {
