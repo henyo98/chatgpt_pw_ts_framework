@@ -1,5 +1,5 @@
 
-import { ZboroviAPI } from './zboroviApi';
+import { ZboroviAPI } from './zborovi.api'
 
 export type APIClients = {
   zborovi: ZboroviAPI;

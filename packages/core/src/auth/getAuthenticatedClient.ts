@@ -1,5 +1,5 @@
 import { request } from '@playwright/test';
-import { ZboroviAPI } from '@api/clients/zboroviApi';
+import { ZboroviAPI } from '@api/clients/zborovi.api';
 // Helper to create authenticated clients for a given user
 export async function getAuthenticatedClient(role: string) {
   const storagePath = `cookie-storage/${role}.json`;

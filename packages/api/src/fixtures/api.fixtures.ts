@@ -1,6 +1,6 @@
-import base from '@playwright/test'
-import { request } from '@playwright/test'
-import { ZboroviAPI } from '@api/clients/zboroviApi';
+import base from '@playwright/test';
+import { request } from '@playwright/test';
+import { ZboroviAPI } from '@api/clients/zborovi.api';
 import { APIClients } from '@api/clients/api-clients';
 import { getAuthenticatedClient } from '@core/auth/getAuthenticatedClient';
 

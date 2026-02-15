@@ -21,7 +21,6 @@ async function globalSetup() {
     const apiContext = await request.newContext({
     });
     const baseApi = new BaseAPI(apiContext)
-    // const apiContext = await request.newContext({ baseURL: env.API_URL_PUBLIC });
 
     // 1. Get CSRF token
     const csrfResp = await baseApi.get(`${baseURL}${ENDPOINTS.csrf}`, authCsrfSchema);
