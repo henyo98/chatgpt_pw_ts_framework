@@ -3,6 +3,7 @@ import { ZodSchema } from 'zod'
 import { withRetry } from '@core/errors/retry'
 import { logZodError } from '@core/loggers/zodLogger'
 import { logger } from '@core/loggers/logger'
+import { trimResponseBody } from '@core/utils/responseBodyTrimmer'
 export class BaseAPI {
     constructor(protected request: APIRequestContext) { }
     private async handle<T>(
@@ -24,9 +25,12 @@ export class BaseAPI {
             const body = await r.text()
             logger.error(`API ${method} ${url} failed`, {
                 status,
-                body
+                body: trimResponseBody(body)
             })
-            throw new Error(`API ${status}: ${body}`)
+            // throw new Error(`API ${status}: ${body}`)
+            const error = new Error(`API method: '${method}' with url: '${url}' failed with ${status}\nResponse: `);
+            (error as any).responseBody = body
+            throw error
         }
         const json = await r.json()
         if (!schema) {
@@ -55,15 +59,15 @@ export class BaseAPI {
         //     throw new Error(`Schema validation failed: ${parsed.error.toString()}\nResponse body: ${JSON.stringify(json)}`);
     }
     get<T>(u: string, s?: ZodSchema<T>) {
-        return withRetry(() => this.handle(this.request.get(u), s))
+        return withRetry(() => this.handle(this.request.get(u), s, false, 'GET', u))
     }
     post<T>(u: string, d: any, s?: ZodSchema<T>) {
-        return withRetry(() => this.handle(this.request.post(u, { data: d }), s))
+        return withRetry(() => this.handle(this.request.post(u, { data: d }), s, false, 'POST', u))
     }
     put<T>(u: string, d: any, s?: ZodSchema<T>) {
-        return withRetry(() => this.handle(this.request.put(u, { data: d }), s))
+        return withRetry(() => this.handle(this.request.put(u, { data: d }), s, false, 'PUT', u))
     }
     delete<T>(u: string, s?: ZodSchema<T>) {
-        return withRetry(() => this.handle(this.request.delete(u), s, true))
+        return withRetry(() => this.handle(this.request.delete(u), s, true, true, 'DELETE', u))
     }
 }

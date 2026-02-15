@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import * as generalSchemas from './generalSchemas';
+import * as generalSchemas from './general.schema';
 
 export const ZborSchema = z.object({
     "announcements_count":z.number(),

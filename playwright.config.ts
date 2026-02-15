@@ -12,7 +12,7 @@ import { env } from '@core/env';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './packages', // or maybe: testDir: 'packages', 
+  testDir: './packages/api/src/tests', // or maybe: testDir: 'packages', 
   timeout: 10_000,
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -28,7 +28,7 @@ export default defineConfig({
     ['html', { outputFolder: 'reports/html', open: 'never' }],
     ['junit', { outputFile: 'reports/junit.xml' }]
   ],
-  globalSetup: 'globalSetup.ts',
+  globalSetup: require.resolve('./global-setup.ts'),
   // use: {
   //   storageState: 'storageState.json',
   // },
@@ -44,22 +44,22 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { name: 'guest', use: { storageState: undefined } }, //TODO: remove storageState and implement actual guest context in fixtures, so that we can test unauthenticated API calls without having to rely on authenticatedApi fixture and its users
-    { name: 'user', use: { storageState: undefined } },
-    { name: 'zboradmin', use: { storageState: undefined } },
-    { name: 'superadmin', use: { storageState: undefined } },
-    {
-      name: 'UI Tests',
-      testDir: './src/ui/tests',
-    },
-    {
-      name: 'API Tests',
-      testDir: './src/api/tests',
-    },
-    {
-      name: 'DB Tests',
-      testDir: './src/db/tests',
-    },
+    // { name: 'guest', use: { storageState: undefined } }, //TODO: remove storageState and implement actual guest context in fixtures, so that we can test unauthenticated API calls without having to rely on authenticatedApi fixture and its users
+    // { name: 'user', use: { storageState: undefined } },
+    // { name: 'zboradmin', use: { storageState: undefined } },
+    // { name: 'superadmin', use: { storageState: undefined } },
+    // {
+    //   name: 'UI Tests',
+    //   testDir: './src/ui/tests',
+    // },
+    // {
+    //   name: 'API Tests',
+    //   testDir: './src/api/tests',
+    // },
+    // {
+    //   name: 'DB Tests',
+    //   testDir: './src/db/tests',
+    // },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },

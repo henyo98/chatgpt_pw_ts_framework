@@ -7,7 +7,7 @@ import { getAuthenticatedClient } from '@core/auth/getAuthenticatedClient';
 // Extend base fixture
 export const test = base.extend<{
     api: APIClients;
-    getAuthenticatedApi: (username: string) => Promise<APIClients>;
+    getAuthenticatedApi: (role: string) => Promise<APIClients>;
 }>({
     // Unauthenticated API
     api: async ({ }, use) => {
@@ -20,8 +20,8 @@ export const test = base.extend<{
         // Track all clients created in a single test
         const clients: { context: any }[] = [];
         // Pass this function to the test
-        await use(async (username: string) => {
-            const client = await getAuthenticatedClient(username);
+        await use(async (role: string) => {
+            const client = await getAuthenticatedClient(role);
             clients.push(client);
             return client;
         });

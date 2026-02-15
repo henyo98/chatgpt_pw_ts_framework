@@ -1,6 +1,6 @@
 import { BaseAPI } from '@core/base/BaseAPI';
 import { URLS } from '@core/constants/urls';
-import { ZboroviSchema, ZboroviTopSchema } from '@api/schemas/zborSchema';
+import { ZboroviTopSchema } from '@api/schemas/zbor.schema';
 import { ENDPOINTS } from '@core/constants/endpoints';
 
 export class ZboroviAPI extends BaseAPI {

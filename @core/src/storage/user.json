@@ -1,0 +1,35 @@
+{
+  "cookies": [
+    {
+      "name": "__Host-next-auth.csrf-token",
+      "value": "9d13bf3683b1355655608a7df9662d0ea32487194d56429ad34c9d1c91f22fe5%7Ca7bab8d590bd48a20b99e73ccff1bc9488f780b3fce51d6fb3a76622a3b9bda1",
+      "domain": "test.zborapp.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-next-auth.callback-url",
+      "value": "https%3A%2F%2Ftest.zborapp.com",
+      "domain": "test.zborapp.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "LOCALE",
+      "value": "sr",
+      "domain": "test.zborapp.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

@@ -8,9 +8,10 @@ node_modules/
 /playwright/.auth/
 package-lock.json
 
-# Files with credentials
+# Files with credentials and cookies
 users.*.json
 !users.test.json.template
+/cookie-storage
 
 # Environment variables
 .env
