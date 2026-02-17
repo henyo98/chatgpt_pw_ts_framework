@@ -11,7 +11,7 @@ package-lock.json
 # Files with credentials and cookies
 users.*.json
 !users.test.json.template
-/cookie-storage
+/storage-states
 
 # Environment variables
 .env
