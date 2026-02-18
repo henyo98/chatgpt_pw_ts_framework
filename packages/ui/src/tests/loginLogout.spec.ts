@@ -1,12 +1,12 @@
-import { test, expect } from '@ui/fixtures/ui.fixtures'
-import { ROLES } from '@core/constants/domain'
+import {test} from '@ui/fixtures/ui.fixtures'
+import { expect } from '@playwright/test';
+import { AUTHENTICATED_ROLES } from '@core/constants/domain'
 import { env } from '@core/env';
 
-ROLES.forEach((ROLE) => {
+AUTHENTICATED_ROLES.forEach((ROLE) => {
     test(`Login for role: ${ROLE}`, async ({ uiPageUnauthenticated }) => {
-        
-        if (ROLE !== 'guest') {
-            await uiPageUnauthenticated.goto(env.BASE_URL)
-        }
+        const page = uiPageUnauthenticated
+        await page.goto(env.BASE_URL);
+        await expect(page.locator("css=input[class^='SearchZbor']")).toBeVisible();
     });
 });

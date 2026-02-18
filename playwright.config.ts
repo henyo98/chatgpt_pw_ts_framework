@@ -12,7 +12,7 @@ import { env } from '@core/env';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './packages/api/src/tests', // or maybe: testDir: 'packages', 
+  testDir: './packages/ui/src/tests', // or maybe: testDir: 'packages', 
   timeout: 10_000,
   /* Run tests in files in parallel */
   fullyParallel: true,
