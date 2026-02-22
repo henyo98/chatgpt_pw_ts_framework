@@ -1,3 +1,4 @@
+//This will be used in test cases for creating new zbor or user
 import { faker } from '@faker-js/faker';
 import { UserDataSchema, UserData } from '../schemas/userData.schema';
 export const buildUser=():UserData=>UserDataSchema.parse({
